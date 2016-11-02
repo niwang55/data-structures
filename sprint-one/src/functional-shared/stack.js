@@ -4,6 +4,7 @@ var Stack = function() {
   var someInstance = {};
 
   someInstance.stackSize = 0;
+  someInstance.storage = {};
 
   _.extend(someInstance, stackMethods);
 
@@ -11,19 +12,24 @@ var Stack = function() {
 };
 
 var stackMethods = {
-	push: function(value) {
-		this.stackSize++;
-	},
+  push: function(value) {
+    this.stackSize++;
+    this.storage[this.stackSize] = value;
+  },
 
-	pop: function() {
-		if( this.stackSize ) {
-			this.stackSize--;
-		}
-	},
+  pop: function() {
+    if ( this.stackSize ) {
+      var temp = this.storage[this.stackSize];
+      delete this.storage[this.stackSize];
+      this.stackSize--;
 
-	size: function() {
-		return this.stackSize;
-	}
+      return temp;
+    }
+  },
+
+  size: function() {
+    return this.stackSize;
+  }
 };
 
 
