@@ -33,34 +33,72 @@ Graph.prototype.removeNode = function(node) {
       i++;
     }
   }
+
+  for (var i = 0; i < this.allNodes.length; i++ ) {
+    this.removeEdge(this.allNodes[i].value, node);
+  }
 };
 
 // Returns a boolean indicating whether two specified nodes are connected.  Pass in the values contained in each of the two nodes.
 Graph.prototype.hasEdge = function(fromNode, toNode) {
+  for (var i = 0; i < this.allNodes.length; i++) {
+    if ( this.allNodes[i].value === fromNode ) {
+      for ( var j = 0; j < this.allNodes[i].edges.length; j++ ) {
+        if ( this.allNodes[i].edges[j].value === toNode ) {
+          return true;
+        }
+      }
+    }
+  }
+
+  return false;
 };
 
 // Connects two nodes in a graph by adding an edge between them.
 Graph.prototype.addEdge = function(fromNode, toNode) {
   for ( var i = 0; i < this.allNodes.length; i++ ) {
     if ( this.allNodes[i].value === fromNode ) {
-      this.allNodes[i].edges.push();
+      for ( var j = 0; j < this.allNodes.length; j++) {
+        if ( this.allNodes[j].value === toNode ) {
+          this.allNodes[j].edges.push( this.allNodes[i]);
+          this.allNodes[i].edges.push( this.allNodes[j]);
+        }
+      }
       debugger;
     }
 
-    if ( this.allNodes[i].value === toNode ) {
-      this.allNodes[i].edges.push();
-      debugger;
-    }
     debugger;
   }
 };
 
 // Remove an edge between any two specified (by value) nodes.
 Graph.prototype.removeEdge = function(fromNode, toNode) {
+  for (var i = 0; i < this.allNodes.length; i++) {
+    if (this.allNodes[i].value === fromNode) {
+      for (var j = 0; j < this.allNodes[i].edges.length; j++) {
+        if (this.allNodes[i].edges[j].value === toNode) {
+          this.allNodes[i].edges.splice(j, 1);
+        }
+      }
+    }
+  }
+
+  for (var i = 0; i < this.allNodes.length; i++) {
+    if (this.allNodes[i].value === toNode) {
+      for (var j = 0; j < this.allNodes[i].edges.length; j++) {
+        if (this.allNodes[i].edges[j].value === fromNode) {
+          this.allNodes[i].edges.splice(j, 1);
+        }
+      }
+    }
+  }
 };
 
 // Pass in a callback which will be executed on each node of the graph.
 Graph.prototype.forEachNode = function(cb) {
+  for (var i = 0; i < this.allNodes.length; i++) {
+    cb(this.allNodes[i].value);
+  }
 };
 
 var graphNode = function(value, edges) {
