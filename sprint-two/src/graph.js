@@ -64,10 +64,7 @@ Graph.prototype.addEdge = function(fromNode, toNode) {
           this.allNodes[i].edges.push( this.allNodes[j]);
         }
       }
-      debugger;
     }
-
-    debugger;
   }
 };
 
