@@ -36,4 +36,19 @@ describe('binarySearchTree', function() {
     binarySearchTree.depthFirstLog(func);
     expect(array).to.eql([5, 2, 3]);
   });
+
+  // it('should have a working "contains" method after the tree is altered', function() {
+  //   binarySearchTree.insert(1);
+  //   binarySearchTree.insert(2);
+  //   expect(binarySearchTree.contains(2)).to.equal(true);
+  //   var func = function(value) { 
+  //     value = value * 2;
+  //   };
+  //   binarySearchTree.depthFirstLog(func);
+  //   var array = [];
+  //   var func2 = function(value) { array.push(value); };
+  //   binarySearchTree.depthFirstLog(func2);
+  //   debugger;
+  //   // expect(binarySearchTree.contains(4)).to.equal(true);
+  // });
 });
