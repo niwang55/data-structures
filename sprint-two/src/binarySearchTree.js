@@ -3,6 +3,7 @@ var BinarySearchTree = function(value) {
   newBST.value = value;
   newBST.left;
   newBST.right;
+  newBST.parent = null;
 
   return newBST;
 };
@@ -15,12 +16,14 @@ BSTMethods.insert = function(value) {
     if (value < thisBST.value) {
       if ( thisBST.left === undefined ) {
         thisBST.left = BinarySearchTree(value);
+        thisBST.left.parent = thisBST;
       } else {
         iterator(thisBST.left);
       }
     } else {
       if ( thisBST.right === undefined ) {
         thisBST.right = BinarySearchTree(value);
+        thisBST.right.parent = thisBST;
       } else {
         iterator(thisBST.right);
       }
@@ -63,6 +66,71 @@ BSTMethods.depthFirstLog = function(cb) {
 
   iterator(this);
 };
+
+BSTMethods.breadthFirstLog = function(cb) {
+  var queue = new Queue();
+  var size = queue.size();
+  queue.enqueue(this);
+  var test = [];
+
+  var iterator = function(node) {
+    debugger;
+    if (node.left) {
+      queue.enqueue(node.left);
+    }
+
+    if (node.right) {
+      queue.enqueue(node.right);
+    }
+
+    var currentSize = queue.size();
+    var temp = queue.dequeue();
+    var newSize = queue.size();
+    test.push(temp.value);
+    debugger;
+    if (queue.size() > 0) {
+      iterator(queue.storage[newSize]);
+    }
+  };
+
+  iterator(this);
+};
 /*
  * Complexity: What is the time complexity of the above functions?
  */
+
+
+
+
+
+
+
+function Queue() {
+  // Hey! Rewrite in the new style. Your code will wind up looking very similar,
+  // but try not not reference your old code in writing the new style.
+  this.storage = {};
+  this.queueSize = 0;  
+}
+
+Queue.prototype.size = function () {
+  return this.queueSize;
+};
+
+Queue.prototype.enqueue = function(value) {
+  this.queueSize++;
+  this.storage[this.queueSize] = value;
+};
+
+Queue.prototype.dequeue = function() {
+  if (this.queueSize) {
+    var temp = this.storage[1];
+    delete this.storage[1];
+    this.queueSize--;
+
+    for ( var key in this.storage) {
+      this.storage[key - 1] = this.storage[key];
+    }
+
+    return temp;
+  }
+};

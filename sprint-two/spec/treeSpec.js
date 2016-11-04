@@ -46,6 +46,36 @@ describe('tree', function() {
     tree.addChild(6);
     tree.children[0].addChild(7);
     expect(tree.children.length).to.equal(2);
-    expect(tree.children[0].children.length).to.equal(1)
+    expect(tree.children[0].children.length).to.equal(1);
+  });
+
+  it('should have a parent', function() {
+    tree.addChild(5);
+    tree.addChild(6);
+    tree.children[0].addChild(7);
+    expect(tree.children[0].parent.value).to.equal(undefined);
+    expect(tree.parent).to.equal(null);
+    expect(tree.children[1].parent.value).to.equal(undefined);
+    expect(tree.children[0].children[0].parent.value).to.equal(5);
+  });
+
+  it('should remove a child from its parent and vice versa', function() {
+    tree.addChild(5);
+    tree.addChild(6);
+    expect(tree.children.length).to.equal(2);
+    tree.removeFromParent(tree.children[0]);
+    expect(tree.children.length).to.equal(1);
+    expect(tree.children[0].value).to.equal(6);
+  });
+
+  it('should execute a callback on each value in the tree with traverse', function() {
+    var values = [];
+    tree.addChild(5);
+    tree.addChild(6);
+    tree.children[0].addChild(7);
+    tree.traverse(function(value) {
+      values.push(value);
+    });
+    expect(values).to.eql([undefined, 5, 7, 6]);
   });
 });
