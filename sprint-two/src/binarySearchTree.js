@@ -3,7 +3,7 @@ var BinarySearchTree = function(value) {
   newBST.value = value;
   newBST.left;
   newBST.right;
-  newBST.parent = null;
+  newBST.size = 0;
 
   return newBST;
 };
@@ -16,14 +16,14 @@ BSTMethods.insert = function(value) {
     if (value < thisBST.value) {
       if ( thisBST.left === undefined ) {
         thisBST.left = BinarySearchTree(value);
-        thisBST.left.parent = thisBST;
+        this.size++;
       } else {
         iterator(thisBST.left);
       }
     } else {
       if ( thisBST.right === undefined ) {
         thisBST.right = BinarySearchTree(value);
-        thisBST.right.parent = thisBST;
+        this.size++;
       } else {
         iterator(thisBST.right);
       }
@@ -89,6 +89,10 @@ BSTMethods.breadthFirstLog = function(cb) {
   };
 
   iterator(this);
+};
+
+BSTMethods.rebalance = function() {
+
 };
 /*
  * Complexity: What is the time complexity of the above functions?

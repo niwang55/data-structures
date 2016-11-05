@@ -61,4 +61,8 @@ describe('binarySearchTree', function() {
     binarySearchTree.breadthFirstLog(func);
     expect(array).to.eql([5, 3, 6, 4]);
   });
+
+  it('should refactor when n < logn', function() {
+    // expect depth to equal logn/log2;
+  });
 });
