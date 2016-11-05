@@ -30,4 +30,19 @@ describe('set', function() {
     set.add('3');
     expect(set._storage.length).to.equal(3);
   });
+
+  it('should add numbers to a set', function() {
+    set.add(1);
+    set.add(2);
+    expect(set.contains(1)).to.equal(true);
+    expect(set.contains(2)).to.equal(true);
+  });
+
+  it('should handle input objects of any type', function() {
+    set.add([1]);
+    set.add({ var1: 'var1' });
+    expect(set._storage[0]).to.eql([1]);
+    // expect(set.contains([1])).to.equal(true);
+    // expect(set.contains({ var1: 'var1' })).to.equal(true);
+  });
 });

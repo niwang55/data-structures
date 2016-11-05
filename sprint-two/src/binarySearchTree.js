@@ -69,12 +69,9 @@ BSTMethods.depthFirstLog = function(cb) {
 
 BSTMethods.breadthFirstLog = function(cb) {
   var queue = new Queue();
-  var size = queue.size();
   queue.enqueue(this);
-  var test = [];
 
   var iterator = function(node) {
-    debugger;
     if (node.left) {
       queue.enqueue(node.left);
     }
@@ -83,13 +80,11 @@ BSTMethods.breadthFirstLog = function(cb) {
       queue.enqueue(node.right);
     }
 
-    var currentSize = queue.size();
     var temp = queue.dequeue();
-    var newSize = queue.size();
-    test.push(temp.value);
-    debugger;
+    cb(temp.value);
+
     if (queue.size() > 0) {
-      iterator(queue.storage[newSize]);
+      iterator(queue.storage[1]);
     }
   };
 

@@ -11,7 +11,14 @@ setPrototype.add = function(item) {
 };
 
 setPrototype.contains = function(item) {
-  return this._storage.indexOf(item) !== -1;
+  var ret = false;
+
+  for (var i = 0; i < this._storage.length; i++) {
+    if (_.isEqual(this._storage[i], item)) {
+      ret = true;
+    }
+  }
+  return ret;
 };
 
 setPrototype.remove = function(item) {
