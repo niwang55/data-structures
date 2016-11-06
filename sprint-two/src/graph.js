@@ -81,20 +81,21 @@ Graph.prototype.forEachNode = function(cb) {
   }
 };
 
-var graphNode = function(value, edges) {
-  var node = {};
-
-  node.value = value;
-  node.edges = edges;
-
-  return node;
-};
 /*
  * Complexity: What is the time complexity of the above functions?
  */
 
 
 // Graph using a graphNode class
+// var graphNode = function(value, edges) {
+//   var node = {};
+
+//   node.value = value;
+//   node.edges = edges;
+
+//   return node;
+// };
+
 // // Instantiate a new graph
 // var Graph = function() {
 //   this.allNodes = [];
